@@ -2,7 +2,9 @@ package com.saltside.assignment.service;
 
 import static com.google.common.collect.Collections2.transform;
 import static java.util.Collections.emptyList;
+import static java.util.Objects.isNull;
 import static java.util.stream.Collectors.toList;
+import static org.springframework.util.CollectionUtils.isEmpty;
 
 import java.time.Instant;
 import java.util.Collection;
@@ -52,8 +54,7 @@ public class BirdMediator {
 		return bird;
 	};
 
-	@Resource
-	private BirdRepository birdRepository;
+	@Resource private BirdRepository birdRepository;
 
 	public BirdResponse save(final BirdsRequest bird) {
 		return DB_TO_RES.apply((birdRepository.save(REQ_TO_DB.apply(bird))));
@@ -69,17 +70,16 @@ public class BirdMediator {
 
 	public Collection<BirdResponse> findAllVisibleBirds() {
 		Collection<Bird> dbResult = birdRepository.findByVisibleIsTrue();
-		if(CollectionUtils.isEmpty(dbResult)) {
+		if(isEmpty(dbResult)) {
 			return emptyList();
 		}
 		return transform(dbResult, DB_TO_RES);
 	}
 
-	public int deleteBird(final String id) {
-		int result = Math.toIntExact(birdRepository.removeById(id));
-		if(result == 0) {
+	public void deleteBird(final String id) {
+		Long result = birdRepository.removeById(id);
+		if(isNull(result) || result.longValue() == 0L) {
 			throw new BirdNotFoundException(id);
 		}
-		return result;
 	}
 }

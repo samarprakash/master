@@ -66,11 +66,9 @@ public class BirdService {
 	@ResponseBody()
 	public ResponseEntity<Void> deleteBird(@PathVariable("id") final String id) {
 		log.info("Delete bird: id=[{}]", id);
-		final int response = birdMediator.deleteBird(id);
 		
-		if(response == 0) {
-			return new ResponseEntity<>(NO_CONTENT);
-		}
+		birdMediator.deleteBird(id);
+		
 		return new ResponseEntity<>(OK);
 	}
 	
