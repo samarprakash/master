@@ -1,13 +1,12 @@
 package com.saltside.assignment.dto;
 
-//import com.google.common.testing.EqualsTester;
 import static com.google.common.collect.ImmutableSortedSet.copyOf;
+import static org.mockito.MockitoAnnotations.initMocks;
 import static org.testng.Assert.assertEquals;
 
 import java.util.Collection;
 import java.util.Set;
 
-import org.mockito.MockitoAnnotations;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -32,8 +31,8 @@ public class BirdsRequestTest {
 	
 	@BeforeMethod
 	public void setup() throws Exception {
-		MockitoAnnotations.initMocks(this);
 		target = new BirdsRequest(NAME, FAMILY, CONTINENTS, ADDED, VISIBLE);
+		initMocks(this);
 		
 		OBJECT_MAPPER.enable(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY);
 	}
@@ -52,11 +51,10 @@ public class BirdsRequestTest {
 				"{\"added\":\"added\",\"continents\":[{\"items\":\"item\"}],\"family\":\"family\",\"name\":\"name\",\"visible\":false}");
 	}
 	
-	/*public void test_unMarshaling() throws Exception {
+	@Test(enabled = false)
+	public void test_unMarshaling() throws Exception {
 		final BirdsRequest result = OBJECT_MAPPER
 				.readValue("{\"added\":\"added\",\"continents\":[{\"items\":\"item\"}],\"family\":\"family\",\"name\":\"name\",\"visible\":false}", BirdsRequest.class);
 		assertEquals(result, target);
-	}*/
-	
-	
+	}
 }
