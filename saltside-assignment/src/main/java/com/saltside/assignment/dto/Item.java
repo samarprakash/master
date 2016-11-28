@@ -1,6 +1,7 @@
 
 package com.saltside.assignment.dto;
 
+import javax.annotation.Generated;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -11,6 +12,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+@Generated(value={"com.saltside.assignment.dto.Item"})
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @EqualsAndHashCode
 @ToString

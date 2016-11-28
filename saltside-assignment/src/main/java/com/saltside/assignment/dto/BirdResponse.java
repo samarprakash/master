@@ -23,36 +23,24 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
-/**
- * POST /birds [request]
- * <p>
- * Add a new bird to the library
- * 
- */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@Generated("com.saltside.assignment.dto")
-@JsonPropertyOrder({
-    "name",
-    "family",
-    "continents",
-    "added",
-    "visible"
-})
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+@Generated(value={"com.saltside.assignment.dto.BirdResponse"})
+@JsonPropertyOrder(alphabetic = true)
 @EqualsAndHashCode
 @ToString
 @Getter
 public class BirdResponse {
 
-    @NotNull
+	@NotNull(message = "name cannot be null")
     private final String name;
     
     
-    @NotNull
+	@NotNull(message = "family cannot be null")
     private final String family;
     
-    @Size(min = 1)
+    @Size(min = 1, message = "continents size must be greater than 1")
     @Valid
-    @NotNull
+    @NotNull(message = "continents cannot be null")
     private final Set<Item> continents;
     
     
@@ -62,12 +50,12 @@ public class BirdResponse {
     @Nullable
     private final boolean visible;
     
-    @Nullable
+    @NotNull(message = "id cannot be null")
     private final String id;
 
     @JsonCreator
     public BirdResponse(
-    		@JsonProperty("id") @Nullable final String id, 
+    		@JsonProperty("id") final String id, 
     		@JsonProperty("name") final String name, 
     		@JsonProperty("family") final String family, 
     		@JsonProperty("continents") final Collection<Item> continents, 

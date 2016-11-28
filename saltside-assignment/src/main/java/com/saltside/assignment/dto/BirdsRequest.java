@@ -23,8 +23,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@Generated("com.saltside.assignment.dto")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+@Generated(value={"com.saltside.assignment.dto.BirdsRequest"})
 @JsonPropertyOrder(alphabetic = true)
 @EqualsAndHashCode
 @ToString
@@ -38,7 +38,7 @@ public class BirdsRequest {
 	@NotNull(message = "family cannot be null")
     private final String family;
     
-    @Size(min = 1)
+	@Size(min = 1, message = "continents size must be greater than 1")
     @Valid
     @NotNull(message = "continents cannot be null")
     private final Set<Item> continents;
